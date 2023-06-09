@@ -18,24 +18,15 @@ Currently only pandas dataframes are accepted and the must be located in ./Datas
 For citation:
 
 @Article{math11122617,
-
 AUTHOR = {Shalileh, Soroosh},
-
 TITLE = {An Effective Partitional Crisp Clustering Method Using Gradient Descent Approach},
-
 JOURNAL = {Mathematics},
-
 VOLUME = {11},
-
 YEAR = {2023},
-
 NUMBER = {12},
-
 ARTICLE-NUMBER = {2617},
-
 URL = {https://www.mdpi.com/2227-7390/11/12/2617},
 ISSN = {2227-7390},
-
 DOI = {10.3390/math11122617}
 
 }
