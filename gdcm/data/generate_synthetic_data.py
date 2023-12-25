@@ -172,16 +172,12 @@ if __name__ == "__main__":
     print("Number of data sets", len(settings)*n_repeats)
 
     # Generate and save synthetic data sets
-
-    # Generate and save synthetic data sets
-
-    # Generate and save synthetic data sets
     for setting in settings:
         n = setting[0]
         k = setting[1]
         v = setting[2]
         alpha = setting[3]
-        cardinalities = gsd.clusters_cardinality(n, k)
+        cardinalities = clusters_cardinality(n, k)
 
         for r in range(1, n_repeats + 1):  # number of repeats
 
@@ -193,14 +189,14 @@ if __name__ == "__main__":
             if not os.path.exists(os.path.join("../Datasets/F/synthetic", data_name)):
                 os.mkdir(os.path.join("../Datasets/F/synthetic", data_name))
 
-            x_, xn_ = gsd.generate_quantitative_features(n=n, v=v,
-                                                         n_clusters=k, alpha=alpha,
-                                                         cardinality=cardinalities,
-                                                         v_noise1=int(np.floor(v / 2))
-                                                         )
-            y_ = gsd.flat_ground_truth(cardinalities)
+            x_, xn_ = generate_quantitative_features(n=n, v=v,
+                                                     n_clusters=k, alpha=alpha,
+                                                     cardinality=cardinalities,
+                                                     v_noise1=int(np.floor(v / 2))
+                                                     )
+            y_ = flat_ground_truth(cardinalities)
 
-            shuffled_idx = gsd.shuffler(n)
+            shuffled_idx = shuffler(n)
 
             x = x_[shuffled_idx, :]
             xn = xn_[shuffled_idx, :]
