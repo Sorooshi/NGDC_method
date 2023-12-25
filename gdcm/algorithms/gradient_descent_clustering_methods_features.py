@@ -198,7 +198,7 @@ class GDCMf:
 
     @staticmethod
     def _get_subkey():
-        seed = np.random.randint(low=0, high=1e10, size=1)[0]
+        seed = np.random.randint(low=0, high=1e6, size=1)[0]
         key = jax.random.PRNGKey(seed)
         _, subkey = jax.random.split(key)
         return subkey
