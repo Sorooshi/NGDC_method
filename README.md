@@ -16,7 +16,7 @@ competitors.
 
 To use the NGDC, first clone to this repository; next, in the directory where the main.py is located, run the following command:
 
-    python main.py --algorithm_name="gdcm_f" --init="random" --max_iter=10  --run=1 --data_name="iris" --update_rule="ngdc" --mu_1=0.45 --verbose=1 --step_size=0.001 --n_init=10
+    python main.py --init="random" --max_iter=10  --run=1 --data_name="iris" --update_rule="ngdc" --mu_1=0.45 --verbose=1 --step_size=0.001 --n_init=10
 
 
 Currently only pandas dataframes are accepted and the must be located in ./Datasets/F/ directory, unless a user modifies it.
