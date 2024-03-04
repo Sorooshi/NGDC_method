@@ -33,7 +33,7 @@ class GDCMf:
         'user': user-defined centroid indices for initial centroids.
 
     n_init : int, default=10
-        Number of time the RGDC algorithm will be run with different
+        Number of time the NGDC algorithm will be run with different
         centroid seeds. The final results will be the best output of
         n_init consecutive runs in terms of inertia.
 
@@ -55,7 +55,7 @@ class GDCMf:
     mu_2 : float, default=999e-3,
           Exponential decay rate for the second moment estimates (i.e. squared gradients) in Adam.
 
-    step_size : float, default=1e-3
+    step_size : float, default=0.01
         Gradient Descent step size, also known as learning rate to update the cluster centers.
 
     centroids_idx :  array of shape (n_clusters, 1), default = None
@@ -66,10 +66,8 @@ class GDCMf:
 
     update_rule = str, default="agdc",
         one of the three following  cases are supported:
-            1)  vgdc: applies vanilla gdc algorithm (VGDC);
-            2) ngdc : applies gdc with Nestrov momentum algorithm (NGDC);
-            3) agdc : applies gdc with Adam algorithm (Adam GDC).
-
+            1) ngdc : applies gdc with Nestrov momentum algorithm (NGDC);
+ 
     batch_size = int, default=1,
         the size of the batch to apply the update rule.
         Fixing the batch size equal to one should be considered one of the main contribution of the proposed methods.
