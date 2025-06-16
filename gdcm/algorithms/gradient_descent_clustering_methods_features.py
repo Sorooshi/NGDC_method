@@ -3,8 +3,12 @@ import numpy as np
 import jax.numpy as jnp
 from copy import deepcopy
 
-from jax.config import config
-config.update("jax_enable_x64", True)
+try:
+    from jax.config import config
+    config.update("jax_enable_x64", True)
+except ImportError:
+    import jax
+    jax.config.update("jax_enable_x64", True)
 
 from sklearn.metrics import adjusted_rand_score,\
     normalized_mutual_info_score
@@ -188,7 +192,10 @@ class GDCMf:
 
     @staticmethod
     def is_positive_semidefinite(m):
-        return jax.tree_leaves(jnp.all(jnp.linalg.eigvals(m) >= 0))
+        try:
+            return jax.tree.leaves(jnp.all(jnp.linalg.eigvals(m) >= 0))
+        except AttributeError:
+            return jax.tree_util.tree_leaves(jnp.all(jnp.linalg.eigvals(m) >= 0))
 
     @staticmethod
     def is_approximately_zero(v):
@@ -434,7 +441,10 @@ class GDCMf:
                                 previous_moment_1 = deepcopy(self.moment_1)  # momentum
                                 mean_batch = mean_batch + self.mu_1 * previous_moment_1
                                 grads = jax.jacfwd(distance_fn, argnums=(1,))(mean_batch, self.centroids[k, :], self.p)
-                                grads = jax.tree_leaves(grads)[0]
+                                try:
+                                    grads = jax.tree.leaves(grads)[0]
+                                except AttributeError:
+                                    grads = jax.tree_util.tree_leaves(grads)[0]
                                 self.moment_1 = (self.mu_1*previous_moment_1) - (self.step_size*grads)
                                 updated_centroid = self.centroids[k, :] + self.moment_1
                                 self.centroids = self.centroids.at[k].set(updated_centroid)
